@@ -1,4 +1,7 @@
 body {
+  font-family: 'Press Start 2P', cursive;
+  color: rgb(205, 0, 0);
+  text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
   background-color: steelblue;
 }
 
@@ -13,6 +16,7 @@ body {
   flex-direction: column;
   margin: 0 auto;
   background-color: antiquewhite;
+  border: 1px solid black;
 }
 
 div[class$="Row"] {
@@ -36,11 +40,11 @@ div[class$="Cell"] {
 }
 
 div[class$="CenterCell"] {
-  border-right: 2px solid black;
-  border-left: 2px solid black;
+  border-right: 2px solid rgb(205, 0, 0);;
+  border-left: 2px solid rgb(205, 0, 0);;
 }
 
 .middleRow {
-  border-top: 2px solid black;
-  border-bottom: 2px solid black;
+  border-top: 2px solid rgb(205, 0, 0);;
+  border-bottom: 2px solid rgb(205, 0, 0);;
 }

@@ -8,8 +8,8 @@ const playerFactory = (name, marker, markerSrc) => {
 };
 
 //create players
-const playerOne = playerFactory('Jeff', 'x', './X.png');
-const playerTwo = playerFactory('Jenn', 'o', './O.png');
+const playerOne = playerFactory('Jeff', 'x', './imgs/X.png');
+const playerTwo = playerFactory('Jenn', 'o', './imgs/O.png');
 
 //dynamically draw grid with eventlisterner for player click
 (function createGrid() {
@@ -123,13 +123,13 @@ function checkForWin(player) {
 
 //add new image to winning move markers
 function colorWinningMove(move) {
-  move.map(cell => document.querySelector(`.${cell}`).getElementsByTagName('img')[0].src = './Happy.png')
+  move.map(cell => document.querySelector(`.${cell}`).getElementsByTagName('img')[0].src = './imgs/Happy.png')
 }
 
 //add new image to all markers in case
 function colorDraw() {
   let oMarkers = Array.from(document.querySelectorAll('.o'));
   let xMarkers = Array.from(document.querySelectorAll('.x'));
-    oMarkers.map(marker => marker.src = './Sad1.png');
-    xMarkers.map(marker => marker.src = './Sad2.png');
+    oMarkers.map(marker => marker.src = './imgs/Sad1.png');
+    xMarkers.map(marker => marker.src = './imgs/Sad2.png');
 }
