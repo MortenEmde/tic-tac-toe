@@ -39,7 +39,10 @@ function updateAnnouncementBoard(player) {
   const announcementBoard = document.querySelector('.announcementBoard');
   if (winner) {
     return announcementBoard.innerHTML = `${player.marker.toUpperCase()} wins!`;
-  } 
+  } else if (playerOne.playerCells.length === 5 || playerTwo.playerCells.length === 5) {
+    colorDraw()
+    return announcementBoard.innerHTML = `It's a Draw!`;
+  }
   if (!playerOne.playerTurn && !playerTwo.playerTurn){
     let possibleTurns = ['x', 'o'];
     let index = Math.floor(Math.random()*possibleTurns.length);
@@ -111,7 +114,6 @@ function checkForWin(player) {
       player.playerCells.some(playerCellVal => playerCellVal === winningMove[j+1]) &&
       player.playerCells.some(playerCellVal => playerCellVal === winningMove[j+2])) {
         winner = true;
-        console.log(winningMove)
         colorWinningMove(winningMove);
       }
     }
@@ -119,7 +121,15 @@ function checkForWin(player) {
   updateAnnouncementBoard(player)
 }
 
-//add new image to winning move
+//add new image to winning move markers
 function colorWinningMove(move) {
-  move.map(cell => console.log(document.querySelector(`.${cell}`).getElementsByTagName('img')[0].src = './Happy.png'))
+  move.map(cell => document.querySelector(`.${cell}`).getElementsByTagName('img')[0].src = './Happy.png')
+}
+
+//add new image to all markers in case
+function colorDraw() {
+  let oMarkers = Array.from(document.querySelectorAll('.o'));
+  let xMarkers = Array.from(document.querySelectorAll('.x'));
+    oMarkers.map(marker => marker.src = './Sad1.png');
+    xMarkers.map(marker => marker.src = './Sad2.png');
 }
