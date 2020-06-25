@@ -7,18 +7,18 @@ const playerFactory = (name, marker, markerSrc) => {
   return { name, marker, markerSrc, playerCells, playerTurn};
 };
 
-//create players
-const playerOne = playerFactory('Jeff', 'x', './imgs/X.png');
-const playerTwo = playerFactory('Jenn', 'o', './imgs/O.png');
+const playerOne = playerFactory('Unnamed champion of X', 'x', './imgs/X.png');
+const playerTwo = playerFactory('Unnamed champion of O', 'o', './imgs/O.png');
+
 
 //dynamically draw grid with eventlisterner for player click
-(function createGrid() {
+function createGame() {
   const rowClassNames = ['topRow', 'middleRow', 'bottomRow'];
   const cellClassNames = ['LeftCell', 'CenterCell', 'RightCell'];
   const rowLength = rowClassNames.length;
   const columnLength = cellClassNames.length;
   const container = document.querySelector('.container');
-
+  hideStartElements()
   for (let gridX = 0; gridX < rowLength; gridX++) {
     let row = document.createElement('div');
     row.classList.add(rowClassNames[gridX]);
@@ -27,70 +27,89 @@ const playerTwo = playerFactory('Jenn', 'o', './imgs/O.png');
       let cell = document.createElement('div');
       let cellName = rowClassNames[gridX]+cellClassNames[gridY];
       cell.classList.add(cellName);
-      cell.onclick = () => placePlayerMarker(cell);
+      cell.onclick = () => placePlayerMarker(cell, );
       row.appendChild(cell);
     }              
   }
-  updateAnnouncementBoard();
-})()
+  updateName(playerOne, );
+  updateName(playerTwo);
+  updateAnnouncementBoard()
+}
+
+//hide name inputs and start button
+function hideStartElements() {
+  const startElements = document.querySelector('.startElements');
+  startElements.style.display === 'none' ?
+  startElements.style.display = 'block' :
+  startElements.style.display = 'none';
+}
+
+//update name from input fields
+function updateName(player) {
+  let playerName = document.querySelector(`.${player.marker}Input`).value
+  if (playerName !== '') {
+    player.name = playerName;
+  }
+}
 
 //check gamestatus and update announcement-board
-function updateAnnouncementBoard(player) {
+function updateAnnouncementBoard(currentPlayer) {
   const announcementBoard = document.querySelector('.announcementBoard');
   if (winner) {
-    return announcementBoard.innerHTML = `${player.marker.toUpperCase()} wins!`;
+    return announcementBoard.innerHTML = `${currentPlayer.name} wins!`;
   } else if (playerOne.playerCells.length === 5 || playerTwo.playerCells.length === 5) {
     colorDraw()
     return announcementBoard.innerHTML = `It's a Draw!`;
   }
   if (!playerOne.playerTurn && !playerTwo.playerTurn){
-    let possibleTurns = ['x', 'o'];
-    let index = Math.floor(Math.random()*possibleTurns.length);
-    let firstTurn = possibleTurns[index].toUpperCase();
-    announcementBoard.innerHTML = `It is ${firstTurn}'s turn!`;
-    if (firstTurn === playerOne.marker.toUpperCase()) {
-      return playerOne.playerTurn = true;
-    } else {
-      return playerTwo.playerTurn = true;
-    }
+    announcementBoard.innerHTML = `It is ${randomStartingPlayer()}'s turn!`
   } else if (playerOne.playerTurn) {
-    return announcementBoard.innerHTML = `It is ${playerOne.marker.toUpperCase()}'s turn!`;
+    return announcementBoard.innerHTML = `It is ${playerOne.name}'s turn!`;
   } else if (playerTwo.playerTurn) {
-    return announcementBoard.innerHTML = `It is ${playerTwo.marker.toUpperCase()}'s turn!`;
+    return announcementBoard.innerHTML = `It is ${playerTwo.name}'s turn!`;
   }
 };
 
+//randomize if player one or two starts
+function randomStartingPlayer() {
+  const possibleTurns = ['x', 'o'];
+  let index = Math.floor(Math.random()*possibleTurns.length);
+  let firstTurn = possibleTurns[index];
+  if (firstTurn === playerOne.marker) {
+    playerOne.playerTurn = true;
+    return playerOne.name
+  } else {
+    playerTwo.playerTurn = true;
+    return playerTwo.name
+  }
+}
+
 //place player-marker.
-function placePlayerMarker(cell) {
+function placePlayerMarker(cell, ) {
   let playerMarker = document.createElement('img');
   if (cell.innerHTML !== '' || winner) {
     return
   } else if (cell.innerHTML === '' && playerOne.playerTurn) {
-    processTurn(cell, playerMarker, playerOne)
+    processTurn(cell, playerMarker, playerOne, playerTwo)
   } else if (cell.innerHTML === '' && playerTwo.playerTurn) {
-    processTurn(cell, playerMarker, playerTwo)
+    processTurn(cell, playerMarker, playerTwo, playerOne)
   }
 }
 
 //process player marker selection, placement, register move made.
-function processTurn(cell, element, player) {
-  element.src = player.markerSrc;
-  element.classList.add(player.marker);
-  togglePlayerTurn();
-  player.playerCells.push(cell.classList.value);
+function processTurn(cell, element, currentPlayer, nextPlayer) {
+  element.src = currentPlayer.markerSrc;
+  element.classList.add(currentPlayer.marker);
+  togglePlayerTurn(currentPlayer, nextPlayer);
+  currentPlayer.playerCells.push(cell.classList.value);
   cell.appendChild(element);
-  checkForWin(player);
+  checkForWin(currentPlayer);
 }
 
 //toggle player turn.
-function togglePlayerTurn() {
-  if (playerOne.playerTurn) {
-    playerOne.playerTurn = false;
-    playerTwo.playerTurn = true;
-  } else {
-    playerTwo.playerTurn = false;
-    playerOne.playerTurn = true;
-  }
+function togglePlayerTurn(currentPlayer, nextPlayer) {
+    currentPlayer.playerTurn = false;
+    nextPlayer.playerTurn = true;
 }
 
 //array of possible winconditions

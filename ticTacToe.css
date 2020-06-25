@@ -9,6 +9,23 @@ body {
   text-align: center;
 }
 
+.startElements {
+  display: flex;
+  flex-direction: column;
+  width: 50%;
+  margin: 0 auto;
+}
+
+.xInput, .oInput, .startBtn{
+  margin-bottom: 2em;
+  font-family: 'Press Start 2P', cursive;
+  height:2em;
+}
+
+.inputLabel {
+  margin-bottom: .5em;
+}
+
 .container {
   width: 360px;
   max-width: 360px;
