@@ -10,14 +10,21 @@
 <body>
   <h1 class="header">Tic Tac Toe</h1>
   <div class="container"></div>
-  <h2 class="announcementBoard"></h2>
+  <div class="announcements">
+    <h2 class="announcementBoard"></h2>
+    <div class="scoreBoard">
+      <h3 class="namePlates"></h3>
+      <h1 class="score"></h1>
+    </div>
+  </div>
   <div class="startElements">
     <label for="playerOneInput" class="inputLabel">Player1 name:</label>
-    <input type="text" class="xInput">
+    <input type="text" class="xInput" maxlength="20">
     <label for="playerTwoInput" class="inputLabel">Player2 name:</label>
-    <input type="text" class="oInput">
+    <input type="text" class="oInput" maxlength="20">
     <button class=startBtn onclick="createGame()">Start Game</button>
   </div>
+  <button class="resetBtn" style="display: none" onclick="resetGame()">Play again</button>
   <script src="./ticTacToe.js"></script>
 </body>
 </html>

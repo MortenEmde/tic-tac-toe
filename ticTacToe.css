@@ -5,7 +5,7 @@ body {
   background-color: steelblue;
 }
 
-.header, .announcementBoard {
+.header, .announcements {
   text-align: center;
 }
 
@@ -16,14 +16,35 @@ body {
   margin: 0 auto;
 }
 
-.xInput, .oInput, .startBtn{
+.xInput, .oInput, .startBtn, .resetBtn {
   margin-bottom: 2em;
   font-family: 'Press Start 2P', cursive;
   height:2em;
+  border-radius: 1em;
+  border: none;
+}
+
+.xInput, .oInput {
+  background-color: antiquewhite;
+  padding: .2em .8em
 }
 
 .inputLabel {
   margin-bottom: .5em;
+}
+
+.startBtn:hover, .resetBtn:hover{
+  background-color: rgb(142, 142, 142);
+}
+
+.resetBtn {
+  display: block;
+  width: 50%;
+  margin: 0 auto;
+}
+
+.scoreBoard {
+  margin: 3em auto;
 }
 
 .container {
