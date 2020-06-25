@@ -5,7 +5,7 @@ body {
   background-color: steelblue;
 }
 
-.header, .announcements {
+.header, .announcementBoard {
   text-align: center;
 }
 
@@ -47,7 +47,7 @@ body {
   margin: 3em auto;
 }
 
-.container {
+.gameBoardContainer {
   width: 360px;
   max-width: 360px;
   display: flex;
