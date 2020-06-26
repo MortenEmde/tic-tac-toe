@@ -18,13 +18,18 @@
     </div>
   </div>
   <div class="startElements">
-    <label for="playerOneInput" class="inputLabel">Player1 name:</label>
+    <label for="playerOneInput" class="inputLabel" id="playerOneTag">Player1 Name:</label>
     <input type="text" class="xInput" maxlength="20">
-    <label for="playerTwoInput" class="inputLabel">Player2 name:</label>
+    <label for="playerTwoInput" class="inputLabel" id="playerTwoTag">Player2 Name:</label>
     <input type="text" class="oInput" maxlength="20">
+    <label for="avatarOptionContainer" class="inputLabel" id="avatarTag">Avatar Selection:</label>
+    <div class="avatarOptionContainer"></div>
     <button class=startBtn onclick="createGame()">Start Game</button>
   </div>
-  <button class="resetBtn" style="display: none" onclick="resetGame()">Play again</button>
+  <div class="gameOverElements" style="display: none">
+    <button class="resetBtn" onclick="resetGame()">Play Again</button>
+    <button class="changeSettingsBtn" onclick="">Change Avatar</button>
+  </div>
   <script src="./ticTacToe.js"></script>
 </body>
 </html>

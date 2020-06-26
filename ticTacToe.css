@@ -16,8 +16,7 @@ body {
   margin: 0 auto;
 }
 
-.xInput, .oInput, .startBtn, .resetBtn {
-  margin-bottom: 2em;
+.xInput, .oInput, .startBtn, .resetBtn, .changeSettingsBtn {
   font-family: 'Press Start 2P', cursive;
   height:2em;
   border-radius: 1em;
@@ -26,25 +25,35 @@ body {
 
 .xInput, .oInput {
   background-color: antiquewhite;
-  padding: .2em .8em
+  padding: .2em .8em;
+  margin-top: .5em;
 }
 
 .inputLabel {
-  margin-bottom: .5em;
+  display: flex;
+  margin-top: 1.5em;
 }
 
-.startBtn:hover, .resetBtn:hover{
+#playerOneTag {
+  color: rgb(238, 211, 0);
+}
+
+#playerTwoTag {
+  color: rgb(52, 52, 255);
+}
+
+.startBtn:hover, .resetBtn:hover, .changeSettingsBtn:hover{
   background-color: rgb(142, 142, 142);
 }
 
-.resetBtn {
+.resetBtn, .changeSettingsBtn {
   display: block;
   width: 50%;
-  margin: 0 auto;
+  margin: .6em auto;
 }
 
 .scoreBoard {
-  margin: 3em auto;
+  margin: 3em auto 1em auto;
 }
 
 .gameBoardContainer {
@@ -78,11 +87,38 @@ div[class$="Cell"] {
 }
 
 div[class$="CenterCell"] {
-  border-right: 2px solid rgb(205, 0, 0);;
-  border-left: 2px solid rgb(205, 0, 0);;
+  border-right: 2px solid rgb(205, 0, 0);
+  border-left: 2px solid rgb(205, 0, 0);
 }
 
 .middleRow {
-  border-top: 2px solid rgb(205, 0, 0);;
-  border-bottom: 2px solid rgb(205, 0, 0);;
+  border-top: 2px solid rgb(205, 0, 0);
+  border-bottom: 2px solid rgb(205, 0, 0);
+}
+
+.avatarOptionContainer {
+  align-self: center;
+  display: flex;
+  width: 170%;
+  height: 130px;
+  margin: 1em 0;
+}
+
+.avatarImg {
+  margin: auto;
+  width: 120px;
+  height: 120px;
+  max-width: 120px;
+  max-height: 120px;
+  transition-property: box-shadow;
+  transition-duration: .3s;
+  transition-timing-function: linear;
+}
+
+.xAvatar {
+  box-shadow: 8px 8px 8px rgb(238, 211, 0), -8px -8px 8px rgb(238, 211, 0), 8px -8px 8px rgb(238, 211, 0), -8px 8px 8px rgb(238, 211, 0);
+}
+
+.oAvatar {
+  box-shadow: 8px 8px 8px rgb(52, 52, 255), -8px -8px 8px rgb(52, 52, 255), 8px -8px 8px rgb(52, 52, 255), -8px 8px 8px rgb(52, 52, 255);
 }
