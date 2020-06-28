@@ -1,15 +1,16 @@
 // player factory function
-const playerFactory = (name, marker, markerSrc, playerAvatarHappy, playerAvatarSad) => {
+const playerFactory = (name, color, marker, markerSrc, playerAvatarHappy, playerAvatarSad) => {
   let playerCells = [];
   let playerTurn = false;
   let playerScore = 0;
-  return { name, marker, markerSrc, playerAvatarHappy, playerAvatarSad, playerCells, playerTurn, playerScore};
+  let nameText = `<span style=\"color:${color}\">${name}</span>`
+  return { name, nameText, marker, markerSrc, playerAvatarHappy, playerAvatarSad, playerCells, playerTurn, playerScore};
 };
 
 // global gamestate variables
 let winner = false;
-const playerOne = playerFactory('Champion of X', 'x', './imgs/X.png', './imgs/peepoHappy.png', './imgs/peepoSad.png');
-const playerTwo = playerFactory('Champion of O', 'o', './imgs/O.png', './imgs/spongeHappy.png', './imgs/spongeSad.png');
+const playerOne = playerFactory('Champion of X', 'rgb(238, 211, 0)', 'x', './imgs/X.png', './imgs/peepoHappy.png', './imgs/peepoSad.png');
+const playerTwo = playerFactory('Champion of O', 'rgb(52, 52, 255)', 'o', './imgs/O.png', './imgs/spongeHappy.png', './imgs/spongeSad.png');
 
 // dynamically draw game grid
 function createGame() {
@@ -18,7 +19,9 @@ function createGame() {
   const rowLength = rowClassNames.length;
   const columnLength = cellClassNames.length;
   const gameBoardContainer = document.querySelector('.gameBoardContainer');
-  toggleHideElement('.startElements')
+  toggleHideElement('.inputs');
+  toggleHideElement('.avatarOptions');
+  toggleHideElement('.startBtn');
   for (let gridX = 0; gridX < rowLength; gridX++) {
     let row = document.createElement('div');
     row.classList.add(rowClassNames[gridX]);
@@ -39,9 +42,9 @@ function createGame() {
 // toggle display html element
 function toggleHideElement(elementClass) {
   const element = document.querySelector(elementClass);
-  element.style.display === 'none' ?
-  element.style.display = 'block' :
-  element.style.display = 'none';
+  element.classList.contains('hide') ?
+  element.classList.remove('hide') :
+  element.classList.add('hide');
 }
 
 // update player name and avatar
@@ -65,7 +68,7 @@ function updateAnnouncementBoard(currentPlayer) {
   if (winner) {
     toggleHideElement('.gameOverElements');
     score.innerHTML = `${playerOne.playerScore} : ${playerTwo.playerScore}`;
-    return announcement.innerHTML = `${currentPlayer.name} wins!`;
+    return announcement.innerHTML = `${currentPlayer.nameText} wins!`;
   } else if (playerOne.playerCells.length === 5 || playerTwo.playerCells.length === 5) {
     markDraw()
     toggleHideElement('.gameOverElements')
@@ -73,12 +76,12 @@ function updateAnnouncementBoard(currentPlayer) {
   }
   if (!playerOne.playerTurn && !playerTwo.playerTurn){
     announcement.innerHTML = `It is ${randomStartingPlayer()}'s turn!`;
-    namePlates.innerHTML = `${playerOne.name} VS ${playerTwo.name}`;
+    namePlates.innerHTML = `${playerOne.nameText} VS ${playerTwo.nameText}`;
     score.innerHTML = `${playerOne.playerScore} : ${playerTwo.playerScore}`;
   } else if (playerOne.playerTurn) {
-    announcement.innerHTML = `It is ${playerOne.name}'s turn!`;
+    announcement.innerHTML = `It is ${playerOne.nameText}'s turn!`;
   } else if (playerTwo.playerTurn) {
-    announcement.innerHTML = `It is ${playerTwo.name}'s turn!`;
+    announcement.innerHTML = `It is ${playerTwo.nameText}'s turn!`;
   }
 };
 
@@ -89,29 +92,37 @@ function randomStartingPlayer() {
   let firstTurn = possibleTurns[index];
   if (firstTurn === playerOne.marker) {
     playerOne.playerTurn = true;
-    return playerOne.name
+    return playerOne.nameText
   } else {
     playerTwo.playerTurn = true;
-    return playerTwo.name
+    return playerTwo.nameText
   }
 }
 
 // reset gamestate
 function resetGame() {
-  let allImgs = Array.from(document.querySelectorAll('img'));
-    allImgs.map(img => img.parentNode.removeChild(img));
+  let allXMarkers = Array.from(document.querySelectorAll('.x'));
+  allXMarkers.map(img => img.parentNode.removeChild(img));
+  let allOMarkers = Array.from(document.querySelectorAll('.o'));
+  allOMarkers.map(img => img.parentNode.removeChild(img));
   winner = false
   playerOne.playerCells = [];
   playerOne.playerTurn = false;
+  playerOne.avatar
   playerTwo.playerCells = [];
   playerTwo.playerTurn = false;
+  updatePlayer(playerOne);
+  updatePlayer(playerTwo);
   toggleHideElement('.gameOverElements');
   updateAnnouncementBoard();
+  if (!document.querySelector('.avatarOptions').classList.contains('hide')) {
+    document.querySelector('.avatarOptions').classList.add('hide');
+  }
 }
 
-// toggles game menu
-function avatarSelection() {
-  return
+// toggles avatar selection
+function toggleAvatarSelection() {
+  toggleHideElement('.avatarOptions');
 }
 
 // place player-marker

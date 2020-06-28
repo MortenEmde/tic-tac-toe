@@ -27,6 +27,7 @@ body {
   background-color: antiquewhite;
   padding: .2em .8em;
   margin-top: .5em;
+  width: 100%;
 }
 
 .inputLabel {
@@ -96,10 +97,13 @@ div[class$="CenterCell"] {
   border-bottom: 2px solid rgb(205, 0, 0);
 }
 
-.avatarOptionContainer {
-  align-self: center;
-  display: flex;
+.avatarOptions {
   width: 170%;
+  align-self: center;
+}
+
+.avatarOptionContainer {
+  display: flex;
   height: 130px;
   margin: 1em 0;
 }
@@ -121,4 +125,8 @@ div[class$="CenterCell"] {
 
 .oAvatar {
   box-shadow: 8px 8px 8px rgb(52, 52, 255), -8px -8px 8px rgb(52, 52, 255), 8px -8px 8px rgb(52, 52, 255), -8px 8px 8px rgb(52, 52, 255);
+}
+
+.hide {
+  display: none;
 }

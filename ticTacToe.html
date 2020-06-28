@@ -18,17 +18,21 @@
     </div>
   </div>
   <div class="startElements">
-    <label for="playerOneInput" class="inputLabel" id="playerOneTag">Player1 Name:</label>
-    <input type="text" class="xInput" maxlength="20">
-    <label for="playerTwoInput" class="inputLabel" id="playerTwoTag">Player2 Name:</label>
-    <input type="text" class="oInput" maxlength="20">
-    <label for="avatarOptionContainer" class="inputLabel" id="avatarTag">Avatar Selection:</label>
-    <div class="avatarOptionContainer"></div>
+    <div class="inputs">
+      <label for="playerOneInput" class="inputLabel" id="playerOneTag">Player1 Name:</label>
+      <input type="text" class="xInput" maxlength="20">
+      <label for="playerTwoInput" class="inputLabel" id="playerTwoTag">Player2 Name:</label>
+      <input type="text" class="oInput" maxlength="20">
+    </div>
+    <div class="avatarOptions">
+      <label for="avatarOptionContainer" class="inputLabel" id="avatarTag">Avatar Selection:</label>
+      <div class="avatarOptionContainer"></div>
+    </div>
     <button class=startBtn onclick="createGame()">Start Game</button>
   </div>
-  <div class="gameOverElements" style="display: none">
+  <div class="gameOverElements hide">
     <button class="resetBtn" onclick="resetGame()">Play Again</button>
-    <button class="changeSettingsBtn" onclick="">Change Avatar</button>
+    <button class="changeSettingsBtn" onclick="toggleAvatarSelection()">Change Avatar</button>
   </div>
   <script src="./ticTacToe.js"></script>
 </body>
